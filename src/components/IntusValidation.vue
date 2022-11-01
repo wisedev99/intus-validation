@@ -1,11 +1,5 @@
 <script setup>
-import {
-  FormFieldError,
-  FormInput,
-  FormLabel,
-  FormTextarea,
-} from "@/components/form";
-import {ButtonPrimary, ButtonSecondary} from "@/components";
+
 import {ref} from "vue";
 import intus from "intus";
 import {isMax, isMin, isRequired} from "intus/rules";
@@ -69,12 +63,12 @@ function onSubmit() {
       @submit.prevent="onSubmit"
     >
       <div class="mb-6">
-        <FormLabel
+        <label
           class="mb-1"
           required
           >Name
-        </FormLabel>
-        <FormInput
+        </label>
+        <input
           v-model="form.name"
           :error="errors.name"
           placeholder="Recipe name"
@@ -82,14 +76,14 @@ function onSubmit() {
       </div>
 
       <div class="mb-6">
-        <FormLabel
+        <label
           class="mb-1"
           required
           >Ingredients
-        </FormLabel>
-        <FormFieldError v-if="errors.ingredients"
+        </label>
+        <p v-if="errors.ingredients"
           >{{ errors.ingredients }}
-        </FormFieldError>
+        </p>
 
         <div class="mb-2 space-y-2.5">
           <div
@@ -98,14 +92,14 @@ function onSubmit() {
             class="flex gap-2.5"
           >
             <div class="flex-1">
-              <FormInput
+              <input
                 v-model="ingredient.name"
                 :error="errors[`ingredients.${index}.name`]"
                 placeholder="Ingredient name"
               />
             </div>
             <div class="w-28">
-              <FormInput
+              <input
                 v-model="ingredient.qty"
                 :error="errors[`ingredients.${index}.qty`]"
                 placeholder="Qty"
@@ -113,21 +107,21 @@ function onSubmit() {
               />
             </div>
             <div>
-              <ButtonSecondary @click="onRemoveIngredient(index)">
+              <button @click="onRemoveIngredient(index)">
                 Remove
-              </ButtonSecondary>
+              </button>
             </div>
           </div>
         </div>
 
-        <ButtonSecondary @click="onAddIngredient">
+        <button @click="onAddIngredient">
           Add ingredient
-        </ButtonSecondary>
+        </button>
       </div>
 
       <div>
-        <FormLabel class="mb-1">Description</FormLabel>
-        <FormTextarea
+        <label class="mb-1">Description</label>
+        <textarea
           v-model="form.description"
           :error="errors.description"
           placeholder="What's the recipe about"
@@ -135,7 +129,7 @@ function onSubmit() {
       </div>
 
       <div class="mt-2 flex justify-end">
-        <ButtonPrimary type="submit">Save recipe</ButtonPrimary>
+        <button type="submit">Save recipe</button>
       </div>
     </form>
   </div>
